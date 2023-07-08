@@ -52,6 +52,10 @@ fun LemonadeDemoApp(modifier: Modifier=Modifier){
     var counter by remember {
         mutableStateOf(0)
     }
+
+    var squeezeControl by remember {
+        mutableStateOf(0)
+    }
     val arrayOfStringRes = arrayListOf<String>(
         stringResource(id =R.string.lemonade_tree),
         stringResource(id = R.string.lemonade),
@@ -65,7 +69,10 @@ fun LemonadeDemoApp(modifier: Modifier=Modifier){
         stringResource(id = R.string.drink),
         stringResource(id = R.string.restart)
     )
-
+    val squeezeTimes = arrayListOf<Int>()
+    if(squeezeControl in 1..3){
+        counter =1
+    }
     val currentImag =when(counter){
         0->R.drawable.lemon_tree
         1->R.drawable.lemon_squeeze
@@ -83,9 +90,13 @@ fun LemonadeDemoApp(modifier: Modifier=Modifier){
         Button(onClick = {
 
                              counter += 1
+//                            if(counter ==1){
+                                squeezeControl +=1
+//                            }
 
                             if(counter >=4){
                                 counter =0
+                                squeezeControl =0
                             }
                          },
         shape = RoundedCornerShape(5.dp)
